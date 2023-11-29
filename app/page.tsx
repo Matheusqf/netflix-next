@@ -1,10 +1,18 @@
-export default function Home() {
+import LogoutButton from "@/components/auth/LogoutButton";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+
+export default async function Home() {
+  const { user } = (await getServerSession(authOptions)) || {};
+  if (!user) {
+    redirect("/auth");
+  }
   return (
-    <>
-      <h1 className="text-2x1 text-green-500">Netflix Next 1</h1>
-      <div className="relative h-full w-full bg-[url('/images/hero.jpg')]">
-        a<div>teste</div>
-      </div>
-    </>
+    <div>
+      <div className="text-4xl text-green-400">Netflix Clone</div>
+      {user && <p className="text-white">Logged in as {user.name}</p>}
+      <LogoutButton />
+    </div>
   );
 }
