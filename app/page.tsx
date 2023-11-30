@@ -1,10 +1,16 @@
-export default function Home() {
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "./api/auth/[...nextauth]/authOptions";
+import Navbar from "@/components/ui/Navbar";
+
+export default async function Home() {
+  const { user } = (await getServerSession(authOptions)) || {};
+  if (!user) {
+    redirect("/auth");
+  }
   return (
     <>
-      <h1 className="text-2x1 text-green-500">Netflix Next 1</h1>
-      <div className="relative h-full w-full bg-[url('/images/hero.jpg')]">
-        a<div>teste</div>
-      </div>
+      <Navbar />
     </>
   );
 }
