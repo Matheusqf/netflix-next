@@ -83,13 +83,16 @@ const Auth = () => {
             >
               {variant === "login" ? "Sign In" : "Sign up"}
             </button>
-            <div
-              onClick={() => {
-                signIn("google", { callbackUrl: "/profiles", redirect: true });
-              }}
-              className="flex flex-row gap-4 items-center mt-8 justify-center"
-            >
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+            <div className="flex flex-row gap-4 items-center mt-8 justify-center">
+              <div
+                onClick={() => {
+                  signIn("google", {
+                    callbackUrl: "/profiles",
+                    redirect: true,
+                  });
+                }}
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center cursor-pointer hover:opacity-80 transition"
+              >
                 <FcGoogle size={30} />
               </div>
               <div
