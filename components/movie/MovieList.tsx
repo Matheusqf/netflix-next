@@ -2,17 +2,15 @@
 
 import React from "react";
 import { isEmpty } from "lodash";
-import useMovieList from "@/hooks/useMovieList";
 import MovieCard from "./MovieCard";
 
 type Props = {
+  data: Record<string, any>[];
   title: string;
 };
 
-const MovieList = ({ title }: Props) => {
-  const { data: movies = [] } = useMovieList();
-
-  if (isEmpty(movies)) {
+const MovieList = ({ title, data }: Props) => {
+  if (isEmpty(data)) {
     return null;
   }
   return (
@@ -22,7 +20,7 @@ const MovieList = ({ title }: Props) => {
           {title}
         </p>
         <div className="grid grid-cols-4 gap-2">
-          {movies.map((movie: any) => (
+          {data.map((movie: any) => (
             <MovieCard key={movie.id} data={movie} />
           ))}
         </div>
