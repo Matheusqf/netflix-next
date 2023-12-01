@@ -2,6 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import Navbar from "@/components/ui/Navbar";
+import Billboard from "@/components/ui/Billboard";
+import MovieList from "@/components/movie/MovieList";
 
 export default async function Home() {
   const { user } = (await getServerSession(authOptions)) || {};
@@ -11,6 +13,10 @@ export default async function Home() {
   return (
     <>
       <Navbar />
+      <Billboard />
+      <div className="pb-40">
+        <MovieList title="Trending Now" />
+      </div>
     </>
   );
 }
