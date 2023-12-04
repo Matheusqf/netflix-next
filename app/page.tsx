@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import Navbar from "@/components/ui/Navbar";
 import Billboard from "@/components/ui/Billboard";
-import MovieList from "@/components/movie/MovieList";
+import MoviesSection from "@/components/movie/MoviesSection";
+import InfoModalClientWrapper from "@/components/movie/InfoModalClientWrapper";
 
 export default async function Home() {
   const { user } = (await getServerSession(authOptions)) || {};
@@ -12,11 +13,10 @@ export default async function Home() {
   }
   return (
     <>
+      <InfoModalClientWrapper />
       <Navbar />
       <Billboard />
-      <div className="pb-40">
-        <MovieList title="Trending Now" />
-      </div>
+      <MoviesSection />
     </>
   );
 }
